@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Skranji&display=swap" rel="stylesheet">
     -->
-    
+
 </head>
+
 <body>
     <!-- Header Here-->
     <header id="header">
@@ -22,71 +24,76 @@
 
     <!-- Main Body Here-->
     <!-- Based on the example. It looks like we will have 3 containers inside one.  One for our search.  One displaying our current city and dates weather, and then a 3rd container for the 5 day forecast. -->
-    
-<section id="searchContainer"> <!-- Beginning of Container Box -->
-    
-     <!-- Box 1, Search-->
-   
-    <section id="citySearch">
-        <!-- Within our Search Bar, we have two areas.  One with the actual search bar, and the other with an area displaying previously searched cities-->
-        
-        <section> <!-- Actual Search Bar-->
-            <h2>Search for a City:</h2>
-            <input id="searchInput" placeholder="Enter city name">
-            <button id="searchBtn" type="button">Search</button>
-        </section>
 
-        <section> <!-- List of previous searches-->
-            <list id="citiesSearched"></list>
-            <h4>test searched cities</h4>
+    <section id="searchContainer"> <!-- Beginning of Container Box -->
 
-        </section>
+        <!-- Box 1, Search-->
 
-</section> <!-- End Search Section-->
+        <section id="citySearch">
+            <!-- Within our Search Bar, we have two areas.  One with the actual search bar, and the other with an area displaying previously searched cities-->
 
-     
-     <!-- We wrap the next two boxes into one container so that we can get them stacked on top of eachother using flex and column on the css-->
-<section id="weatherContainer"></section>
-    
-    <!-- Box 2, Current Day/City and Weather -->
-    <section id="currentWeather">
-       <h3>Current Searched City</h3>
-    </section><!-- End Current Day -->
+            <section> <!-- Actual Search Bar-->
+                <h2>Search for a City:</h2>
+                <input id="searchInput" placeholder="Enter city name">
+                <button id="searchBtn" type="button">Search</button>
+            </section>
 
-     <!-- Box 3, 5 day forecast for chosen city -->
-    <section id="fiveDayforecast">
-        <!-- Inside the 5 day, we are going to need 5 boxes, one for each day.-->   
-        
-        <section id="day 1"> <!-- Current Day-->
-            <h3>Test Day</h3>
-        </section>
+            <section> <!-- List of previous searches-->
+                <list id="citiesSearched"></list>
+                <h4>test searched cities</h4>
 
-        <section id="day 2">
-            <h3>Test Day</h3>
-        </section>
-           
-        <section id="day 3">
-            <h3>Test Day</h3>
-        </section>
+            </section>
 
-        <section id="day 4">
-            <h3>Test Day</h3>
-        </section>
+        </section> <!-- End Search Section-->
 
-        <section id="day 5">
-            <h3>Test Day</h3> 
-        </section>
 
-    </section><!-- End Five Day -->
 
-    </section> <!-- End of our Container Box -->
-</section> <!-- End of Weather Container-->
+        <!-- We wrap the next two boxes into one container so that we can get them stacked on top of eachother using flex and column on the css-->
+        <section id="weatherContainer">
+
+            <!-- Box 2, Current Day/City and Weather -->
+            <section id="currentWeather">
+                <h3>Current Searched City</h3>
+            </section><!-- End Current Day -->
+
+            <!-- Box 3, 5 day forecast for chosen city -->
+            <section id="fiveDayforecast">
+                <!-- Inside the 5 day, we are going to need 5 boxes, one for each day.-->
+
+                <section id="day 1"> <!-- Current Day-->
+                    <h3>Test Day</h3>
+                </section>
+
+                <section id="day 2">
+                    <h3>Test Day</h3>
+                </section>
+
+                <section id="day 3">
+                    <h3>Test Day</h3>
+                </section>
+
+                <section id="day 4">
+                    <h3>Test Day</h3>
+                </section>
+
+                <section id="day 5">
+                    <h3>Test Day</h3>
+                </section>
+
+            </section><!-- End Five Day -->
+
+
+        </section> <!-- End of Weather Container Box 2 and 3-->
+
+    </section> <!-- End of our Container for Box 1,2, and 3-->
+
     <!-- Footer Here-->
     <footer id="footer">
 
     </footer>
-    
+
     <!-- javscript link in before the /body close-->
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>
