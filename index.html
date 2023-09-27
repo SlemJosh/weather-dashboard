@@ -23,7 +23,7 @@
     <!-- Main Body Here-->
     <!-- Based on the example. It looks like we will have 3 containers inside one.  One for our search.  One displaying our current city and dates weather, and then a 3rd container for the 5 day forecast. -->
     
-    <section id="container"> <!-- Beginning of Container Box -->
+    <section id="weatherContainer"> <!-- Beginning of Container Box -->
     
      <!-- Box 1, Search-->
    
@@ -31,7 +31,9 @@
     <!-- Within our Search Bar, we have two areas.  One with the actual search bar, and the other with an area displaying previously searched cities-->
         
         <section> <!-- Actual Search Bar-->
-
+            <h3>Search for City:</h3>
+            <input id="searchInput" placeholder="Enter city name">
+            <button id="searchBtn" type="button">Search</button>
         </section>
 
         <section> <!-- List of previous searches-->
