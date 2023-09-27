@@ -27,3 +27,16 @@ body{
     align-items: center;
 }
 
+#citySearch{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#searchInput{
+
+}
+
+#searchBtn{
+    
+}
