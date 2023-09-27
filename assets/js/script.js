@@ -3,6 +3,7 @@
 
 const API_KEY = "9d5dfbe83494f7a8091376c453d71c32";
 const city = document.getElementById('searchInput').value;
+const searchedCities = [];
 
 
 
@@ -13,6 +14,10 @@ function searchCity() {
     var searchInput = $("#searchInput").val();
     fetchWeatherAPI(searchInput);
     $('#searchInput').val("");
+
+    searchedCities.push(searchInput);
+
+    updateSearchhistory();
 }
 // We want our function to run upon the button being pressed.
 $("#searchBtn").click(searchCity);
@@ -33,4 +38,19 @@ function fetchWeatherAPI(city) {
         .fail(function (error) {
             console.error("Error:", error);
         });
+}
+
+// We want to keep a list of the cities we searched so users can just click them and see the info again.
+function updateSearchhistory(){
+    const historyContainer = $("#citiesSearched");
+    historyContainer.empty();
+
+    searchedCities.forEach((city) => {
+        const button = $('<button>').text(city);
+        button.click(() => {
+            fetchWeatherAPI(city);
+        });
+        historyContainer.append(button);
+    })
+
 }

@@ -1,10 +1,10 @@
 /* Things to apply to the entire body */
-body{
+body {
    /* font-family: 'Skranji', cursive, sans-serif;*/  /* Too hard to read, maybe look for a differnet one, or delete all together */
 }
 
 /* Header Box */
-#header{
+#header {
     display: flex;
     align-items: center;
     text-align: center;
@@ -21,14 +21,14 @@ body{
 }
 
 /*I want my container and boxes to initially be centered and able to flex*/
-#pageContainer{
+#pageContainer {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* Our search container is going to be in a column to the left of the other two containers*/
-#citySearch{
+#citySearch {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,7 +37,7 @@ body{
     
 }
 /*We want both our search text input field and our button to take up their own lines. So we set the width to 100% and also add box-sizing so that they are consistent with each other.*/
-#searchInput{
+#searchInput {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -45,7 +45,7 @@ body{
     box-sizing: border-box;
 }
 
-#searchBtn{
+#searchBtn {
     width: 100%;
     background-color: lightblue;
     color: white;
@@ -64,15 +64,31 @@ body{
     background-color: blue;
   }
 
+#searchHistorycontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+
+}
+
+#citiesSearched {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 #weatherContainer {
     display: flex;
     flex-direction: column;
 }
 
-#fiveDayforecast{
+#fiveDayforecast {
     display: flex;
     flex-direction: row;
 }
+
 
   
   
