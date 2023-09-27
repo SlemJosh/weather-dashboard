@@ -27,32 +27,37 @@ body{
     align-items: center;
 }
 
+/* Our search container is going to be in a column to the left of the other two containers*/
 #citySearch{
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     
+    
 }
-
+/*We want both our search text input field and our button to take up their own lines. So we set the width to 100% and also add box-sizing so that they are consistent with each other.*/
 #searchInput{
-    width: 90%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
+    box-sizing: border-box;
 }
 
 #searchBtn{
+    width: 100%;
     background-color: lightblue;
     color: white;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
     border: none;
     border-radius: 10px;
-    padding: 10px 16px;
+    padding: 10px;
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.4s;
+    box-sizing: border-box;
 }
 
 #searchBtn:hover {
