@@ -69,5 +69,10 @@ body{
     flex-direction: column;
 }
 
+#fiveDayforecast{
+    display: flex;
+    flex-direction: row;
+}
+
   
   
