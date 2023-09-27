@@ -33,7 +33,7 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    
+        
     
 }
 /*We want both our search text input field and our button to take up their own lines. So we set the width to 100% and also add box-sizing so that they are consistent with each other.*/
@@ -91,6 +91,12 @@ body {
 #weatherContainer {
     display: flex;
     flex-direction: column;
+}
+
+#currentWeather{
+    border: 2px solid #ccc; /* Add borders with a color of your choice */
+    padding: 10px; /* Add padding for some spacing inside the box */
+    margin: 10px; /* Add margin to separate it from other elements */
 }
 
 #fiveDayforecast {

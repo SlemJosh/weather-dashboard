@@ -27,17 +27,24 @@ function fetchWeatherAPI(city) {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
 
     $.get(apiURL)
-        .done(function (data) {
-            // We want to make sure the openweather api is able to send us the data.  If they are not, then we need to give an error.
-            if (data.cod === 200) {
-                console.log(data);   //Testing to see if we get data
-            } else {
-                console.error("Error", data.message);
-            }
-        })
-        .fail(function (error) {
-            console.error("Error:", error);
-        });
+    .done(function (data) {
+        // We want to make sure the openweather api is able to send us the data.  If they are not, then we need to give an error.
+        if (data.cod === 200) {
+            console.log(data);
+            const weatherInfoDiv = document.getElementById('weatherInfo');
+            weatherInfoDiv.innerHTML = `
+                <p>City: ${data.name}</p>
+                <p>Temperature: ${data.main.temp} °F</p>
+                <p>Weather: ${data.weather[0].description}</p>
+            `;
+            // Testing to see if we get data
+        } else {
+            console.error("Error", data.message);
+        }
+    })
+    .fail(function (error) {
+        console.error("Error:", error);
+    });
 }
 
 // We want to keep a list of the cities we searched so users can just click them and see the info again.
