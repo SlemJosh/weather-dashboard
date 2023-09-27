@@ -19,3 +19,11 @@ body{
     background: linear-gradient(to right, lightblue, blue);
 
 }
+
+/*I want my container and boxes to initially be centered and able to flex*/
+#weatherContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
