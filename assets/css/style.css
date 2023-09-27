@@ -2,8 +2,9 @@
 body{
    /* font-family: 'Skranji', cursive, sans-serif;*/  /* Too hard to read, maybe look for a differnet one, or delete all together */
 }
+
 /* Header Box */
-.header{
+#header{
     display: flex;
     align-items: center;
     text-align: center;
