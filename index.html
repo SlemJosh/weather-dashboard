@@ -23,7 +23,7 @@
     <!-- Main Body Here-->
     <!-- Based on the example. It looks like we will have 3 containers inside one.  One for our search.  One displaying our current city and dates weather, and then a 3rd container for the 5 day forecast. -->
     
-    <section id="weatherContainer"> <!-- Beginning of Container Box -->
+<section id="searchContainer"> <!-- Beginning of Container Box -->
     
      <!-- Box 1, Search-->
    
@@ -42,9 +42,13 @@
 
         </section>
 
-    </section> <!-- End Search Section-->
+</section> <!-- End Search Section-->
 
-     <!-- Box 2, Current Day/City and Weather -->
+     
+     <!-- We wrap the next two boxes into one container so that we can get them stacked on top of eachother using flex and column on the css-->
+<section id="weatherContainer"></section>
+    
+    <!-- Box 2, Current Day/City and Weather -->
     <section id="currentWeather">
        <h3>Current Searched City</h3>
     </section><!-- End Current Day -->
@@ -76,7 +80,7 @@
     </section><!-- End Five Day -->
 
     </section> <!-- End of our Container Box -->
-
+</section> <!-- End of Weather Container-->
     <!-- Footer Here-->
     <footer id="footer">
 

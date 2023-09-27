@@ -21,7 +21,7 @@ body{
 }
 
 /*I want my container and boxes to initially be centered and able to flex*/
-#weatherContainer{
+#searchContainer{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,6 +63,10 @@ body{
 #searchBtn:hover {
     background-color: blue;
   }
+
+#weatherContainer {
+    display: flex;
+}
 
   
   
