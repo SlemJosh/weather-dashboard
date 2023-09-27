@@ -69,15 +69,24 @@ body {
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
-
+    
 }
 
 #citiesSearched {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    
 }
 
+#citiesSearched button{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 5px 0;
+}
 
 #weatherContainer {
     display: flex;
