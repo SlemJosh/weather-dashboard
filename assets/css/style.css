@@ -118,6 +118,9 @@ body {
 #fiveDayforecast {
     display: flex;
     flex-direction: row;
+    background-color: #002244;
+    color: white;
+    padding: 5px;
 }
 
 
