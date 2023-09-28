@@ -76,16 +76,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    box-sizing: border-box;
-    
+        
 }
 
 #citiesSearched button{
     width: 100%;
-    box-sizing: border-box;
     padding: 5px;
     margin: 5px 0;
+   
 }
 
 #weatherContainer {
@@ -95,8 +93,9 @@ body {
 
 #currentWeather{
     border: 2px solid #ccc; /* Add borders with a color of your choice */
-    padding: 10px; /* Add padding for some spacing inside the box */
+    padding: 20px; /* Add padding for some spacing inside the box */
     margin: 10px; /* Add margin to separate it from other elements */
+    width: 200%;
 }
 
 /* I want the name/date to be next to the weather icon we will pull from the API*/
