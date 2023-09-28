@@ -47,16 +47,17 @@ function fetchWeatherAPI(city) {
                 console.error("Error:", error);
             })
         }
-
+// This is where we display our current weather.
 function updateWeatherUI (data, formattedDate, weatherIconcode){
                 const todayCityname = document.getElementById('todayCityname');
                 const todayCitytemp = document.getElementById('todayCitytemp');
                 const todayCitywind = document.getElementById('todayCitywind');
                 const todayCityhumidity = document.getElementById('todayCityhumidity');
 
-                todayCityname.textContent = `City: ${data.name} (${formattedDate})`;
-                todayCitytemp.textContent = `Temperature: ${convertKelvinToFahrenheit(data.main.temp)} °F`;
-                todayCitywind.textContent = `Wind: ${data.wind.speed} m/s`;
+                todayCityname.textContent = `${data.name} (${formattedDate})`;
+                todayCitytemp.textContent = `Temperature: ${convertKelvinToFahrenheit(data.main.temp)} °F`;  //Had to build a converter function as the initial value was in Kelvin and thats not helpful.
+                const windMPH = convertMPStoMPH(data.wind.speed);
+                todayCitywind.textContent = `Wind: ${data.wind.speed} MPH`;  // Also had to build a converter function, as the intitial value was in meters per second, and it'd be much more helpful to have mph.
                 todayCityhumidity.textContent = `Humidity: ${data.main.humidity}%`;
 
                 const iconURL = `https://openweathermap.org/img/wn/${weatherIconcode}.png`;
@@ -72,6 +73,16 @@ function updateWeatherUI (data, formattedDate, weatherIconcode){
 // converted it from Kelvin to Fahrenheit and then I just needed to plug it into the previous function
 function convertKelvinToFahrenheit(kelvin) {
     return ((kelvin - 273.15) * 9 / 5 + 32).toFixed(2); // 
+}
+
+
+// Similiar to the Kelvin to Farhrenheit. Want our wind speed to be relatable.  And meters per second isn't the traditional method I am used to.
+function convertMPStoMPH(mps) {
+    // Conversion factor from m/s to mph
+    const conversionFactor = 2.23694;
+    // Calculate the wind speed in mph
+    const mph = mps * conversionFactor;
+    return mph.toFixed(2); // Return the result with 2 decimal places
 }
 
 // We want to keep a list of the cities we searched so users can just click them and see the info again.
