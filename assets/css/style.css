@@ -24,7 +24,7 @@ body {
 #pageContainer {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 /* Our search container is going to be in a column to the left of the other two containers*/
@@ -97,6 +97,19 @@ body {
     border: 2px solid #ccc; /* Add borders with a color of your choice */
     padding: 10px; /* Add padding for some spacing inside the box */
     margin: 10px; /* Add margin to separate it from other elements */
+}
+
+/* I want the name/date to be next to the weather icon we will pull from the API*/
+#todayCityname  {
+    display:inline-block;
+    vertical-align: middle;
+}
+
+#weatherIcon {
+    display: inline-block;
+    vertical-align:middle;
+    margin-left: 10px;
+
 }
 
 #fiveDayforecast {

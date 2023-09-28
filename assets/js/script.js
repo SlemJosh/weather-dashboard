@@ -27,28 +27,55 @@ function fetchWeatherAPI(city) {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
 
     $.get(apiURL)
-    .done(function (data) {
-        // We want to make sure the openweather api is able to send us the data.  If they are not, then we need to give an error.
-        if (data.cod === 200) {
-            console.log(data);
-            const weatherInfoDiv = document.getElementById('weatherInfo');
-            weatherInfoDiv.innerHTML = `
-                <p>City: ${data.name}</p>
-                <p>Temperature: ${data.main.temp} °F</p>
-                <p>Weather: ${data.weather[0].description}</p>
-            `;
-            // Testing to see if we get data
-        } else {
-            console.error("Error", data.message);
+        .done(function (data) {
+            // We want to make sure the openweather api is able to send us the data.  If they are not, then we need to give an error.
+            if (data.cod === 200) {
+                console.log(data);
+                // Within the function we are also looking to display the date.   So we need to call a new variable and set some parameters.
+                const currentDate = new Date();
+                const options = { year: 'numeric', month: '2-digit', day: '2-digit' };  // We want the year in numeric, the month spelled out, and the day also in numeric.  We can change this later to a different format.
+                const formattedDate = currentDate.toLocaleDateString(undefined, options);   //Here we are going to define a value that we can plug into the fields below.
+                const weatherIconcode = data.weather[0].icon;
+
+                updateWeatherUI(data, formattedDate, weatherIconcode);
+            }
+            else {
+                console.error("Error", data.message);
+            }
+            })
+            .fail(function (error) {
+                console.error("Error:", error);
+            })
         }
-    })
-    .fail(function (error) {
-        console.error("Error:", error);
-    });
+
+function updateWeatherUI (data, formattedDate, weatherIconcode){
+                const todayCityname = document.getElementById('todayCityname');
+                const todayCitytemp = document.getElementById('todayCitytemp');
+                const todayCitywind = document.getElementById('todayCitywind');
+                const todayCityhumidity = document.getElementById('todayCityhumidity');
+
+                todayCityname.textContent = `City: ${data.name} (${formattedDate})`;
+                todayCitytemp.textContent = `Temperature: ${convertKelvinToFahrenheit(data.main.temp)} °F`;
+                todayCitywind.textContent = `Wind: ${data.wind.speed} m/s`;
+                todayCityhumidity.textContent = `Humidity: ${data.main.humidity}%`;
+
+                const iconURL = `https://openweathermap.org/img/wn/${weatherIconcode}.png`;
+                const weatherIcon = document.getElementById('weatherIcon');
+                weatherIcon.src = iconURL;
+
+                weatherIcon.style.display = "inline-block";
+
+}
+       
+
+// Whgen I initially was running the above function I was getting temperature ratings in like the 300's so I looked for a function to convert the temperature they were giving us with the API and
+// converted it from Kelvin to Fahrenheit and then I just needed to plug it into the previous function
+function convertKelvinToFahrenheit(kelvin) {
+    return ((kelvin - 273.15) * 9 / 5 + 32).toFixed(2); // 
 }
 
 // We want to keep a list of the cities we searched so users can just click them and see the info again.
-function updateSearchhistory(){
+function updateSearchhistory() {
     const historyContainer = $("#citiesSearched");
     historyContainer.empty();
 
@@ -60,4 +87,29 @@ function updateSearchhistory(){
         historyContainer.append(button);
     })
 
+
 }
+
+// https://openweathermap.org/weather-conditions
+// Needed to establish some icons provided by the API, so that we can attribute them to not only our current city, but also to the 5 day forecast.
+// Each weather has two potential icons based on wether it's day or night.  While some of the images don't change.  Figured it was important to just keep all the possibilities.
+const weatherIconimages = {
+    '01d': '01d.png',  // clear sky (day)
+    '01n': '01n.png',  // clear sky (night)
+    '02d': '02d.png',  // few clouds (day)
+    '02n': '02n.png',  // few clouds (night)
+    '03d': '03d.png',  // scattered clouds (day)
+    '03n': '03n.png',  // scattered clouds (night)
+    '04d': '04d.png',  // broken clouds (day)
+    '04n': '04n.png',  // broken clouds (night)
+    '09d': '09d.png',  // shower rain (day)
+    '09n': '09n.png',  // shower rain (night)
+    '10d': '10d.png',  // rain (day)
+    '10n': '10n.png',  // rain (night)
+    '11d': '11d.png',  // thunderstorm (day)
+    '11n': '11n.png',  // thunderstorm (night)
+    '13d': '13d.png',  // snow (day)
+    '13n': '13n.png',  // snow (night)
+    '50d': '50d.png',  // mist (day)
+    '50n': '50n.png'   // mist (night)
+};

@@ -42,7 +42,7 @@
             <!-- List of previous searches-->
             <section>
                 <div id="searchHistorycontainer">
-                <list id="citiesSearched"></list>
+                    <list id="citiesSearched"></list>
                 </div>
             </section>
 
@@ -56,40 +56,45 @@
             <!-- Box 2, Current Day/City and Weather -->
             <section id="currentWeather">
                 <!-- Addinng a new div inside the section so that we can display the weather information there.-->
-                <div id ="weatherInfo"></div>
+                <div id="weatherInfo"></div>
+                <h2 id="todayCityname">City</h2>
+                <img id="weatherIcon" src="" alt="Weather Icon" style="display:none;">
+                <p id="todayCitytemp">Temperature:</p>
+                <p id="todayCitywind">Wind:</p>
+                <p id="todayCityhumidity">Humidity: </p>
             </section><!-- End Current Day -->
 
             <!-- Added a section to just keep the header for the next section seperate from the styling that will happen to the items in that 5 day-->
             <section id="forecast">
-                <h3>5-Day Forecast:</h3>    
+                <h3>5-Day Forecast:</h3>
 
                 <!-- Box 3, 5 day forecast for chosen city -->
                 <section id="fiveDayforecast">
-               
-                <!-- Inside the 5 day, we are going to need 5 boxes, one for each day.-->
 
-                <section id="day 1"> <!-- Current Day-->
-                    <h3>Test Day</h3>
-                </section>
+                    <!-- Inside the 5 day, we are going to need 5 boxes, one for each day.-->
 
-                <section id="day 2">
-                    <h3>Test Day</h3>
-                </section>
+                    <section id="day 1"> <!-- Current Day-->
+                        <h3>Test Day</h3>
+                    </section>
 
-                <section id="day 3">
-                    <h3>Test Day</h3>
-                </section>
+                    <section id="day 2">
+                        <h3>Test Day</h3>
+                    </section>
 
-                <section id="day 4">
-                    <h3>Test Day</h3>
-                </section>
+                    <section id="day 3">
+                        <h3>Test Day</h3>
+                    </section>
 
-                <section id="day 5">
-                    <h3>Test Day</h3>
-                </section>
+                    <section id="day 4">
+                        <h3>Test Day</h3>
+                    </section>
 
-            </section><!-- End Five Day -->
-        </section>
+                    <section id="day 5">
+                        <h3>Test Day</h3>
+                    </section>
+
+                </section><!-- End Five Day -->
+            </section>
 
         </section> <!-- End of Weather Container Box 2 and 3-->
 
