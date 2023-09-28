@@ -82,7 +82,7 @@ function convertMPStoMPH(mps) {
     const conversionFactor = 2.23694;
     // Calculate the wind speed in mph
     const mph = mps * conversionFactor;
-    return mph.toFixed(2); // Return the result with 2 decimal places
+    return mph.toFixed(2); // up to 2 decimal places
 }
 
 // We want to keep a list of the cities we searched so users can just click them and see the info again.
