@@ -13,6 +13,9 @@ console.log(city);
 function searchCity() {
     var searchInput = $("#searchInput").val();
     fetchWeatherAPI(searchInput);
+    // Need to add 5day forecast fetch
+    fetchFiveday(searchInput);
+
     $('#searchInput').val("");
 
     searchedCities.push(searchInput);
@@ -42,32 +45,32 @@ function fetchWeatherAPI(city) {
             else {
                 console.error("Error", data.message);
             }
-            })
-            .fail(function (error) {
-                console.error("Error:", error);
-            })
-        }
+        })
+        .fail(function (error) {
+            console.error("Error:", error);
+        })
+}
 // This is where we display our current weather.
-function updateWeatherUI (data, formattedDate, weatherIconcode){
-                const todayCityname = document.getElementById('todayCityname');
-                const todayCitytemp = document.getElementById('todayCitytemp');
-                const todayCitywind = document.getElementById('todayCitywind');
-                const todayCityhumidity = document.getElementById('todayCityhumidity');
+function updateWeatherUI(data, formattedDate, weatherIconcode) {
+    const todayCityname = document.getElementById('todayCityname');
+    const todayCitytemp = document.getElementById('todayCitytemp');
+    const todayCitywind = document.getElementById('todayCitywind');
+    const todayCityhumidity = document.getElementById('todayCityhumidity');
 
-                todayCityname.textContent = `${data.name} (${formattedDate})`;
-                todayCitytemp.textContent = `Temperature: ${convertKelvinToFahrenheit(data.main.temp)} °F`;  //Had to build a converter function as the initial value was in Kelvin and thats not helpful.
-                const windMPH = convertMPStoMPH(data.wind.speed);
-                todayCitywind.textContent = `Wind: ${data.wind.speed} MPH`;  // Also had to build a converter function, as the intitial value was in meters per second, and it'd be much more helpful to have mph.
-                todayCityhumidity.textContent = `Humidity: ${data.main.humidity}%`;
+    todayCityname.textContent = `${data.name} (${formattedDate})`;
+    todayCitytemp.textContent = `Temperature: ${convertKelvinToFahrenheit(data.main.temp)} °F`;  //Had to build a converter function as the initial value was in Kelvin and thats not helpful.
+    const windMPH = convertMPStoMPH(data.wind.speed);
+    todayCitywind.textContent = `Wind: ${data.wind.speed} MPH`;  // Also had to build a converter function, as the intitial value was in meters per second, and it'd be much more helpful to have mph.
+    todayCityhumidity.textContent = `Humidity: ${data.main.humidity}%`;
 
-                const iconURL = `https://openweathermap.org/img/wn/${weatherIconcode}.png`;
-                const weatherIcon = document.getElementById('weatherIcon');
-                weatherIcon.src = iconURL;
+    const iconURL = `https://openweathermap.org/img/wn/${weatherIconcode}.png`;
+    const weatherIcon = document.getElementById('weatherIcon');
+    weatherIcon.src = iconURL;
 
-                weatherIcon.style.display = "inline-block";
+    weatherIcon.style.display = "inline-block";
 
 }
-       
+
 
 // Whgen I initially was running the above function I was getting temperature ratings in like the 300's so I looked for a function to convert the temperature they were giving us with the API and
 // converted it from Kelvin to Fahrenheit and then I just needed to plug it into the previous function
@@ -124,3 +127,45 @@ const weatherIconimages = {
     '50d': '50d.png',  // mist (day)
     '50n': '50n.png'   // mist (night)
 };
+
+// Begining of 5 day functions
+
+function fetchFiveday(city) {
+    const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+    $.ajax({
+        url: apiURL,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            updateFiveday(data);
+        },
+        error: function (error) {
+            console.error("Error fetching forecast:", error);
+        },
+    })
+}
+
+function updateFiveday(data) {
+    const forecastContainer = document.getElementById("fiveDayforecast");
+
+    for (let i = 0; i < 5; i++) {
+        const daySection = document.getElementById(`day${i + 1}`);
+        const dateElement = daySection.querySelector(".currentDayforecast");
+        const iconElement = daySection.querySelector("img");
+        const tempElement = daySection.querySelector(".temperature");
+        const windElement = daySection.querySelector(".wind");
+        const humidityElement = daySection.querySelector(".humidity");
+
+        // Update the HTML with the forecast data
+        dateElement.textContent = formatDate(day.dt_txt); // Format and display the date
+        iconElement.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`; // Set the weather icon
+        tempElement.textContent = `Temperature: ${day.main.temp}°C`; // Display temperature
+        windElement.textContent = `Wind: ${day.wind.speed} m/s`; // Display wind speed
+        humidityElement.textContent = `Humidity: ${day.main.humidity}%`; // Display humidity
+    }
+}
+
+function formatDate(dateTime) {
+    const date = new Date(dateTime);
+    return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+}
