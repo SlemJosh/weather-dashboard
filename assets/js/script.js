@@ -28,6 +28,7 @@ $("#searchBtn").click(searchCity);
 // This is the function for searching the API.  
 function fetchWeatherAPI(city) {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+;
 
     $.get(apiURL)
         .done(function (data) {
@@ -129,9 +130,9 @@ const weatherIconimages = {
 };
 
 // Begining of 5 day functions
-/*
+
 function fetchFiveday(city) {
-    const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+    const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
     $.ajax({
         url: apiURL,
         method: "GET",
@@ -149,25 +150,40 @@ function updateFiveday(data) {
     const forecastContainer = document.getElementById("fiveDayforecast");
 
     for (let i = 0; i < 5; i++) {
-        const daySection = document.getElementById(`day${i + 1}`);
-        const dateElement = daySection.querySelector(".currentDayforecast");
-        const iconElement = daySection.querySelector("img");
-        const tempElement = daySection.querySelector(".temperature");
-        const windElement = daySection.querySelector(".wind");
-        const humidityElement = daySection.querySelector(".humidity");
+        const day = data.list[i * 8 + 4];
+        const date = formatDate(day.dt_txt)
+        console.log(day.dt_txt);
+        const weatherIcon= day.weather[0].icon;
+        const temperature = `Temperature: ${day.main.temp} °F`;
+        const wind = `Wind: ${convertMPStoMPH(day.wind.speed)} MPH`;
+        const humidity = `Humidity: ${day.main.humidity}%`;
 
-        // Update the HTML with the forecast data
-        dateElement.textContent = formatDate(day.dt_txt); // Format and display the date
-        iconElement.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`; // Set the weather icon
-        tempElement.textContent = `Temperature: ${day.main.temp}°C`; // Display temperature
-        windElement.textContent = `Wind: ${day.wind.speed} m/s`; // Display wind speed
-        humidityElement.textContent = `Humidity: ${day.main.humidity}%`; // Display humidity
+        console.log("Date:", date);
+        console.log("Weather Icon:", weatherIcon);
+        console.log("Temperature:", temperature);
+        console.log("Wind:", wind);
+        console.log("Humidity:", humidity);
+
+
+        const dayElement = $("<section>")
+            .attr("id", `day${i + 1}`)
+            .append(
+                $("<h4>")
+                    .addClass("currentDayforecast")
+                    .text(date),
+                $("<img>")
+                .attr("src", `https://openweathermap.org/img/wn/${weatherIcon}.png`),
+                $("<p>").addClass("temperature").text(temperature),
+                $("<p>").addClass("wind").text(wind),
+                $("<p>").addClass("humidity").text(humidity)
+            );
+        forecastContainer.append(dayElement);
+            }
     }
-}
 
 function formatDate(dateTime) {
     const date = new Date(dateTime);
     return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 }
-*/
+
 
