@@ -129,7 +129,7 @@ const weatherIconimages = {
 };
 
 // Begining of 5 day functions
-
+/*
 function fetchFiveday(city) {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
     $.ajax({
@@ -169,3 +169,5 @@ function formatDate(dateTime) {
     const date = new Date(dateTime);
     return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 }
+*/
+
