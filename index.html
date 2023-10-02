@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- 
+
 </head>
 
 <body>
@@ -24,25 +24,23 @@
 
         <!-- Box 1, Search-->
 
-        <section id="citySearch">
+        <section id="citySearchcontainer">
             <!-- Within our Search Bar, we have two areas.  One with the actual search bar, and the other with an area displaying previously searched cities-->
 
-            <section> <!-- Actual Search Bar-->
+            <section id="citySearch"> <!-- Actual Search Bar-->
                 <h2>Search for a City:</h2>
                 <input id="searchInput" placeholder="Enter city name">
                 <button id="searchBtn" type="button">Search</button>
             </section>
 
             <!-- List of previous searches-->
-            <section>
-                <div id="searchHistorycontainer">
-                    <ul id="citiesSearched"></ul>
-                </div>
+            <section id="searchHistorycontainer">
+
+                <div id="citiesSearched"></div>
+
             </section>
 
         </section> <!-- End Search Section-->
-
-
 
         <!-- We wrap the next two boxes into one container so that we can get them stacked on top of eachother using flex and column on the css-->
         <section id="weatherContainer">

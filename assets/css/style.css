@@ -28,15 +28,22 @@ body {
 }
 
 /* Our search container is going to be in a column to the left of the other two containers*/
+#citySearchcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;   
+    margin-top: 10px;    
+}
+
 #citySearch {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    
-        
-    
+  
 }
+
 /*We want both our search text input field and our button to take up their own lines. So we set the width to 100% and also add box-sizing so that they are consistent with each other.*/
 #searchInput {
     width: 100%;
@@ -55,7 +62,7 @@ body {
     border: none;
     border-radius: 10px;
     padding: 10px;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     transition: background-color 0.4s;
     box-sizing: border-box;
@@ -66,10 +73,14 @@ body {
   }
 
 #searchHistorycontainer {
+    width: 100%;
+    border-top: 2px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
+    justify-content: center;
+    margin-top: 20px;
+    
     
 }
 
@@ -77,19 +88,31 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 10px;
    
 }
 
 #citiesSearched button{
-     margin: auto;
-        
-   }
+    background-color: #B9D9EB;
+    width: 100%;     /* Make the buttons as wide as the search bar */
+    color: black;
+    font-weight: bold;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
 
+#citiesSearched button:hover{
+    background-color: #CCCCFF;
+}
 #weatherContainer {
     display: flex;
     flex-direction: column;
 }
+
 /*Similiar to our 5 day, we want the text to be hidden until we have something to show with it.*/
 #todayCitytemp,#todayCitywind,#todayCityhumidity {
     display: none;
