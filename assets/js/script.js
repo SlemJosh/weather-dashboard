@@ -1,6 +1,5 @@
 // Javascript
 // First thing is to put our Key from openweathermap.
-document.addEventListener("DOMContentLoaded", function () {
 
 
 const API_KEY = "9d5dfbe83494f7a8091376c453d71c32";
@@ -30,7 +29,7 @@ $("#searchBtn").click(searchCity);
 // This is the function for searching the API.  
 function fetchWeatherAPI(city) {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
-;
+
 
     $.get(apiURL)
         .done(function (data) {
@@ -65,11 +64,11 @@ function updateWeatherUI(data, formattedDate, weatherIconcode) {
     const windMPH = convertMPStoMPH(data.wind.speed);
     todayCitywind.textContent = `Wind: ${data.wind.speed} MPH`;  // Also had to build a converter function, as the intitial value was in meters per second, and it'd be much more helpful to have mph.
     todayCityhumidity.textContent = `Humidity: ${data.main.humidity}%`;
+    
 
     const iconURL = `https://openweathermap.org/img/wn/${weatherIconcode}.png`;
     const weatherIcon = document.getElementById('weatherIcon');
     weatherIcon.src = iconURL;
-
     weatherIcon.style.display = "inline-block";
 
 }
@@ -154,9 +153,11 @@ function updateFiveday(data) {
     for (let i = 0; i < 5; i++) {
         const day = data.list[i * 8 + 4];
         const date = formatDate(day.dt_txt)
+
+      
         console.log(day.dt_txt);
         const weatherIcon= day.weather[0].icon;
-        const temperature = `Temperature: ${day.main.temp} °F`;
+        const temperature = `Temperature: ${convertKelvinToFahrenheit(day.main.temp)} °F`;
         const wind = `Wind: ${convertMPStoMPH(day.wind.speed)} MPH`;
         const humidity = `Humidity: ${day.main.humidity}%`;
 
@@ -173,19 +174,7 @@ function updateFiveday(data) {
         dayElement.querySelector(".wind").textContent = wind;
         dayElement.querySelector(".humidity").textContent = humidity;
 
-/*
-        const dayElement = $("<section>")
-            .attr("id", `day${i + 1}`)
-            .append(
-                $("<h4>")
-                    .addClass("currentDayforecast")
-                    .text(date),
-                $("<img>")
-                .attr("src", `https://openweathermap.org/img/wn/${weatherIcon}.png`),
-                $("<p>").addClass("temperature").text(temperature),
-                $("<p>").addClass("wind").text(wind),
-                $("<p>").addClass("humidity").text(humidity)
-            );*/
+
         forecastContainer.append(dayElement);
             }
             
@@ -195,9 +184,6 @@ function formatDate(dateTime) {
     const date = new Date(dateTime);
     return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 }
-
-$("#searchBtn").click(searchCity);
-});
 
 
 
