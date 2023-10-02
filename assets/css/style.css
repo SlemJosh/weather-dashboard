@@ -89,6 +89,7 @@ body {
 
 #citiesSearched button{
     background-color: #B9D9EB;
+    padding: 10px;
     width: 100%;     /* Make the buttons as wide as the search bar */
     color: black;
     font-weight: bold;
@@ -96,6 +97,7 @@ body {
     border: none;
     border-radius: 5px;
     font-size: 18px;
+    box-sizing: border-box;
 }
 
 #citiesSearched button:hover{

@@ -2,21 +2,25 @@
 // First thing is to put our Key from openweathermap.
 // On future projects we will look at hiding our keys, so just noting here that we know we shouldn't in practice have the API key right on a public gitHub repo page.
 
-
 const API_KEY = "9d5dfbe83494f7a8091376c453d71c32";
-
 const searchedCities = [];
 
 // Our first thing that needs attention is our search box, with both the button and the text entry field.
 // Here's our first function. We called it citySearch, and we declared a variable and set it to the value that will be input on the index page. We also called another function to take the data we pass it.
 function searchCity() {
-    var searchInput = $("#searchInput").val();
+    var searchInput = document.getElementById("searchInput").value;
+    // Putting a check in to make sure we have a value
+    if (searchInput.trim() === "") {
+        alert("Please enter a city name before searching.");
+        return;
+    }
+
     // Getting our current Weather
     fetchWeatherAPI(searchInput);
     // Also getting the 5 day Weather
     fetchFiveday(searchInput);
 
-    $('#searchInput').val("");
+    document.getElementById('searchInput').value ="";
     // Adding our city to the list of searched cities.
     searchedCities.push(searchInput);
 
@@ -28,8 +32,9 @@ function searchCity() {
 function fetchWeatherAPI(city) {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`;
 
-    $.get(apiURL)
-        .done(function (data) {
+    fetch(apiURL)
+        .then(response => response.json())
+        .then(data => {
             // We want to make sure the openweather api is able to send us the data.  If they are not, then we need to give an error.
             if (data.cod === 200) {
 
@@ -46,10 +51,11 @@ function fetchWeatherAPI(city) {
                 console.error("Error", data.message);
             }
         })
-        .fail(function (error) {
+        .catch(function (error) {
             console.error("Error:", error);
         })
 }
+
 // This is where we display our current weather.  Basically taking the information from the fetch and plugging it into our HTML.
 function updateWeatherUI(data, formattedDate, weatherIconcode) {
     const todayCityname = document.getElementById('todayCityname');
@@ -79,16 +85,17 @@ function updateWeatherUI(data, formattedDate, weatherIconcode) {
 
 // We want to keep a list of the cities we searched so users can just click them and see the info again.
 function updateSearchhistory() {
-    const historyContainer = $("#citiesSearched");
-    historyContainer.empty();
+    const historyContainer = document.getElementById("citiesSearched");
+    historyContainer.innerHTML = "";
 
     searchedCities.forEach((city) => {
-        const button = $('<button>').text(city);
-        button.click(() => {
+        const button = document.createElement('button');
+        button.textContent = city;
+        button.addEventListener(`click`, () => {
             fetchWeatherAPI(city);
         });
         historyContainer.append(button);
-    })
+    });
 
 }
 
@@ -122,18 +129,15 @@ const weatherIconimages = {
 // can't pull the data we requested we aren't stuck in a loop of it just trying and trying. 
 function fetchFiveday(city) {
     const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`;  // Simliar to above we add the parameter for it to keep things in imperial units
-    $.ajax({
-        url: apiURL,
-        method: "GET",
-        dataType: "json",
-        success: function (data) {
+    fetch(apiURL)
+        .then(response => response.json())
+        .then(data => {
             updateFiveday(data);
-        },
-        error: function (error) {
+        })
+        .catch(error => {
             console.error("Error fetching forecast:", error);
-        },
-    })
-}
+        })
+     }
 
 // Now that we have the data for our five day we need to start plugging it into our html in our 5 different boxes.  We need to alter the HTML by using querySelectors and changing those values to what we just received from our fetch.
 
@@ -160,7 +164,6 @@ function updateFiveday(data) {
 
         dayElement.classList.remove("forecast-hidden");
 
-
         forecastContainer.append(dayElement);
     }
 
@@ -179,8 +182,15 @@ function formatDate(dateTime) {
 
 }
 
+document.getElementById("searchBtn").addEventListener(`click`, searchCity);
+document.getElementById("searchInput").addEventListener(`keydown`, function(event){
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        searchCity();
+    }
 
-// We want our function to run upon the button being pressed. But seeing as we want all the information to be obtained.  
+});
+/*// We want our function to run upon the button being pressed. But seeing as we want all the information to be obtained.  
 $("#searchBtn").click(searchCity);
 
 
@@ -193,3 +203,4 @@ $("#searchInput").on("keydown", function (event) {
 });
 
 
+*/
