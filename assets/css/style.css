@@ -1,15 +1,23 @@
 /* Things to apply to the entire body */
 body {
-    
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Consolidating certain styles */
+#header, #footer {
+    text-align: center;
+    background-color: #7CB9E8;
+    color: white;
+    padding: 10px;
 }
 
 /* Header Box */
 #header {
     display: flex;
     align-items: center;
-    text-align: center;
     justify-content: center;
-    color: white;
     font-size: 24px; /* Adjust the font size as needed */
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); /* Adjust shadow values as needed */
@@ -36,7 +44,7 @@ body {
     margin-top: 10px;    
 }
 
-#citySearch {
+#citySearch, #citiesSearched {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,7 +53,7 @@ body {
 }
 
 /*We want both our search text input field and our button to take up their own lines. So we set the width to 100% and also add box-sizing so that they are consistent with each other.*/
-#searchInput {
+#searchInput, #searchBtn {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -54,14 +62,11 @@ body {
 }
 
 #searchBtn {
-    width: 100%;
     background-color: lightblue;
     color: white;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
     border: none;
-    border-radius: 10px;
-    padding: 10px;
     font-size: 20px;
     cursor: pointer;
     transition: background-color 0.4s;
@@ -79,19 +84,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
-    
-    
-}
-
-#citiesSearched {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    margin-top: 10px;
-   
+    margin-top: 20px;       
 }
 
 #citiesSearched button{
@@ -108,6 +101,7 @@ body {
 #citiesSearched button:hover{
     background-color: #CCCCFF;
 }
+
 #weatherContainer {
     display: flex;
     flex-direction: column;
@@ -137,16 +131,13 @@ body {
 }
 
 /* I want the name/date to be next to the weather icon we will pull from the API*/
-#todayCityname  {
+#todayCityname, #weatherIcon {
     display:inline-block;
     vertical-align: middle;
 }
 
 #weatherIcon {
-    display: inline-block;
-    vertical-align:middle;
     margin-left: 10px;
-
 }
 
 #forecast h3 {
@@ -169,6 +160,7 @@ body {
 .forecast-hidden {
     display: none;
 }
+
 /*Footer Styling.  Want the image to be centered and to keep it at the bottom of the screen.*/
 #footer{
     position: fixed; 
@@ -191,27 +183,10 @@ body {
       font-size: 20px;
     }
     
-    #pageContainer {
-      flex-direction: column;
-      align-items: center;
+    #pageContainer, #citySearch, #weatherContainer, #currentWeather, #forecast {
+      width: 100%
     }
-    
-    #citySearch {
-      width: 100%;
-    }
-    
-    #weatherContainer {
-      width: 100%;
-    }
-    
-    #currentWeather {
-      width: 100%;
-    }
-    
-    #forecast {
-      width: 100%;
-    }
-   
+ 
   }
 
 /* Tablets */
