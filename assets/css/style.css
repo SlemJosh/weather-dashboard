@@ -90,6 +90,16 @@ body {
     display: flex;
     flex-direction: column;
 }
+/*Similiar to our 5 day, we want the text to be hidden until we have something to show with it.*/
+#todayCitytemp,#todayCitywind,#todayCityhumidity {
+    display: none;
+}
+
+#weatherContainer h3{
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+}
 
 #currentWeather{
     border: 2px solid #ccc; /* Add borders with a color of your choice */
@@ -121,11 +131,8 @@ body {
     margin: 0;
     padding: 10px 0;
 }
+
 /* Initially we hide the 5 day boxes, so that we don't view them until after we do a city search and pull a 5 day api */
-#fiveDayforecast {
-     display: none;
-      
-}
 
 #day1, #day2, #day3, #day4, #day5{
     background-color: #002244;
@@ -136,6 +143,10 @@ body {
     text-align: center;
 }
 
+.forecast-hidden {
+    display: none;
+}
+/*Footer Styling.  Want the image to be centered and to keep it at the bottom of the screen.*/
 #footer{
     position: fixed; 
     bottom: 0; 
@@ -148,3 +159,42 @@ body {
     padding: 20px; 
 }
 
+/* Adding our @media Screens */
+
+/* Phones */
+@media (max-width: 767px) {
+    
+    #header {
+      font-size: 20px;
+    }
+    
+    #pageContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    #citySearch {
+      width: 100%;
+    }
+    
+    #weatherContainer {
+      width: 100%;
+    }
+    
+    #currentWeather {
+      width: 100%;
+    }
+    
+    #forecast {
+      width: 100%;
+    }
+   
+  }
+
+/* Tablets */
+  @media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+   
+    #header {
+      font-size: 22px;
+    }
+  }

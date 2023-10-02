@@ -1,27 +1,28 @@
 // Javascript
 // First thing is to put our Key from openweathermap.
+// On future projects we will look at hiding our keys, so just noting here that we know we shouldn't in practice have the API key right on a public gitHub repo page.
 
 
 const API_KEY = "9d5dfbe83494f7a8091376c453d71c32";
-const city = document.getElementById('searchInput').value;
+
 const searchedCities = [];
 
 // Our first thing that needs attention is our search box, with both the button and the text entry field.
 // Here's our first function. We called it citySearch, and we declared a variable and set it to the value that will be input on the index page. We also called another function to take the data we pass it.
 function searchCity() {
     var searchInput = $("#searchInput").val();
+    // Getting our current Weather
     fetchWeatherAPI(searchInput);
-    // Need to add 5day forecast fetch
+    // Also getting the 5 day Weather
     fetchFiveday(searchInput);
 
     $('#searchInput').val("");
-
+    // Adding our city to the list of searched cities.
     searchedCities.push(searchInput);
 
     updateSearchhistory();
 }
-// We want our function to run upon the button being pressed.
-$("#searchBtn").click(searchCity);
+
 
 // This is the function for searching the API.  
 function fetchWeatherAPI(city) {
@@ -31,13 +32,13 @@ function fetchWeatherAPI(city) {
         .done(function (data) {
             // We want to make sure the openweather api is able to send us the data.  If they are not, then we need to give an error.
             if (data.cod === 200) {
-                
+
                 // Within the function we are also looking to display the date.   So we need to call a new variable and set some parameters.
-                                               
+
                 const currentDate = new Date();
                 const options = { year: 'numeric', month: '2-digit', day: '2-digit' };  // We want the year in numeric, the month spelled out, and the day also in numeric.  We can change this later to a different format.
                 const formattedDate = currentDate.toLocaleDateString(undefined, options);   //Here we are going to define a value that we can plug into the fields below.
-                const weatherIconcode = data.weather[0].icon;             
+                const weatherIconcode = data.weather[0].icon;
 
                 updateWeatherUI(data, formattedDate, weatherIconcode);
             }
@@ -49,7 +50,7 @@ function fetchWeatherAPI(city) {
             console.error("Error:", error);
         })
 }
-// This is where we display our current weather.
+// This is where we display our current weather.  Basically taking the information from the fetch and plugging it into our HTML.
 function updateWeatherUI(data, formattedDate, weatherIconcode) {
     const todayCityname = document.getElementById('todayCityname');
     const todayCitytemp = document.getElementById('todayCitytemp');
@@ -61,14 +62,19 @@ function updateWeatherUI(data, formattedDate, weatherIconcode) {
     const windMPH = (data.wind.speed);
     todayCitywind.textContent = `Wind: ${data.wind.speed} MPH`;  // Also had to build a converter function, as the intitial value was in meters per second, and it'd be much more helpful to have mph.
     todayCityhumidity.textContent = `Humidity: ${data.main.humidity}%`;
-    
 
+    // We want to display a weather icon, provided by the API.  
     const iconURL = `https://openweathermap.org/img/wn/${weatherIconcode}.png`;
     const weatherIcon = document.getElementById('weatherIcon');
     weatherIcon.src = iconURL;
     weatherIcon.style.display = "inline-block";
+
+    todayCitytemp.style.display = "block";
+    todayCitywind.style.display = "block";
+    todayCityhumidity.style.display = "block";
     
-  }
+
+}
 
 
 // We want to keep a list of the cities we searched so users can just click them and see the info again.
@@ -85,8 +91,6 @@ function updateSearchhistory() {
     })
 
 }
-
-
 
 // https://openweathermap.org/weather-conditions
 // Needed to establish some icons provided by the API, so that we can attribute them to not only our current city, but also to the 5 day forecast.
@@ -137,13 +141,15 @@ function updateFiveday(data) {
     const forecastContainer = document.getElementById("fiveDayforecast");
 
     for (let i = 0; i < 5; i++) {    // We need to increment each day.
-        const day = data.list[i * 8 + 2];  // Changes our fetch time to 12pm each day
+        const day = data.list[i * 8 + 5];  // Changes our fetch time to 12pm each day
         const date = formatDate(day.dt_txt)
-      
-        const weatherIcon= day.weather[0].icon;
+
+        const weatherIcon = day.weather[0].icon;
         const temperature = `Temperature: ${(day.main.temp)} °F`;
         const wind = `Wind: ${(day.wind.speed)} MPH`;
         const humidity = `Humidity: ${day.main.humidity}%`;
+
+        console.log(day.dt_txt)
 
         const dayElement = document.getElementById(`day${i + 1}`);
         dayElement.querySelector(".currentDayforecast").textContent = date;
@@ -152,27 +158,38 @@ function updateFiveday(data) {
         dayElement.querySelector(".wind").textContent = wind;
         dayElement.querySelector(".humidity").textContent = humidity;
 
+        dayElement.classList.remove("forecast-hidden");
+
 
         forecastContainer.append(dayElement);
-        }
-
-        forecastContainer.style.display = "flex";  // Here we tell the HTML to now display our boxes, where we actually hid them in the CSS to begin with.
-            
     }
+
+    forecastContainer.style.display = "flex";  // Here we tell the HTML to now display our boxes, where we actually hid them in the CSS to begin with.
+
+}
 
 // Here's is where we can get the time and display it for our five day.
 function formatDate(dateTime) {
     const date = new Date(dateTime);
-    const year = date.getFullYear().toString().slice(-2); 
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+    const year = date.getFullYear().toString().slice(-2);
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
 
     return `${month}/${day}/${year}`;
-        
+
 }
 
 
+// We want our function to run upon the button being pressed. But seeing as we want all the information to be obtained.  
+$("#searchBtn").click(searchCity);
 
 
+// I also wanted our button to just work upon someone pressing Enter on the keyboard.
+$("#searchInput").on("keydown", function (event) {
+    if (event.keyCode === 13) {     //The enter key is key 13, so we just check to make sure that that's the button they are pressing.  If it is, and the value in the box is not the default (blank) then it can proceed running our function.
+        event.preventDefault();
+        $("#searchBtn").click();
+    }
+});
 
 

@@ -46,6 +46,7 @@
 
         <!-- We wrap the next two boxes into one container so that we can get them stacked on top of eachother using flex and column on the css-->
         <section id="weatherContainer">
+            <h3>Current City and Weather</h3>
 
             <!-- Box 2, Current Day/City and Weather -->
             <section id="currentWeather">
@@ -67,7 +68,7 @@
 
                     <!-- Inside the 5 day, we are going to need 5 boxes, one for each day.-->
 
-                    <figure id="day1"> <!-- Current Day-->
+                    <figure id="day1" class="forecast-hidden"> <!-- Current Day-->
                         <h4 class="currentDayforecast">Date</h4>
                         <img src="" id="day1icon" alt="Weather Icon">
                         <p class="temperature"></p>
@@ -75,7 +76,7 @@
                         <p class="humidity"></p>
                     </figure>
 
-                    <figure id="day2">
+                    <figure id="day2" class="forecast-hidden">
                         <h4 class="currentDayforecast">Date</h4>
                         <img src="" id="day2icon" alt="Weather Icon">
                         <p class="temperature"></p>
@@ -83,7 +84,7 @@
                         <p class="humidity"></p>
                     </figure>
 
-                    <figure id="day3">
+                    <figure id="day3" class="forecast-hidden">
                         <h4 class="currentDayforecast">Date</h4>
                         <img src="" id="day3icon" alt="Weather Icon">
                         <p class="temperature"></p>
@@ -91,7 +92,7 @@
                         <p class="humidity"></p>
                     </figure>
 
-                    <figure id="day4">
+                    <figure id="day4" class="forecast-hidden">
                         <h4 class="currentDayforecast">Date</h4>
                         <img src="" id="day4icon" alt="Weather Icon">
                         <p class="temperature"></p>
@@ -99,7 +100,7 @@
                         <p class="humidity"></p>
                     </figure>
 
-                    <figure id="day5">
+                    <figure id="day5" class="forecast-hidden">
                         <h4 class="currentDayforecast">Date</h4>
                         <img src="" id="day5icon" alt="Weather Icon">
                         <p class="temperature"></p>
@@ -117,7 +118,7 @@
     <!-- Footer Here-->
     <footer id="footer">
         <a href="https://generatorfun.com/random-bear-image" target="_blank">
-            <img src="assets/images/bearpawdarkblue.png" height="100px" alt="Bear Paw">
+            <img src="assets/images/bearpawdarkblue.png" height="50px" alt="Bear Paw">
         </a>
     </footer>
 
