@@ -1,5 +1,7 @@
 // Javascript
 // First thing is to put our Key from openweathermap.
+document.addEventListener("DOMContentLoaded", function () {
+
 
 const API_KEY = "9d5dfbe83494f7a8091376c453d71c32";
 const city = document.getElementById('searchInput').value;
@@ -164,7 +166,14 @@ function updateFiveday(data) {
         console.log("Wind:", wind);
         console.log("Humidity:", humidity);
 
+        const dayElement = document.getElementById(`day${i + 1}`);
+        dayElement.querySelector(".currentDayforecast").textContent = date;
+        dayElement.querySelector("img").src = `https://openweathermap.org/img/wn/${weatherIcon}.png`;
+        dayElement.querySelector(".temperature").textContent = temperature;
+        dayElement.querySelector(".wind").textContent = wind;
+        dayElement.querySelector(".humidity").textContent = humidity;
 
+/*
         const dayElement = $("<section>")
             .attr("id", `day${i + 1}`)
             .append(
@@ -176,14 +185,22 @@ function updateFiveday(data) {
                 $("<p>").addClass("temperature").text(temperature),
                 $("<p>").addClass("wind").text(wind),
                 $("<p>").addClass("humidity").text(humidity)
-            );
+            );*/
         forecastContainer.append(dayElement);
             }
+            
     }
 
 function formatDate(dateTime) {
     const date = new Date(dateTime);
     return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 }
+
+$("#searchBtn").click(searchCity);
+});
+
+
+
+
 
 

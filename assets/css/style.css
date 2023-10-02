@@ -118,11 +118,37 @@ body {
 #fiveDayforecast {
     display: flex;
     flex-direction: row;
-    background-color: #002244;
-    color: white;
-    padding: 5px;
-    
+      
 }
 
+#day1{
+    background-color: #002244;
+    padding: 5px;
+    color: white;
+}
+
+#day2{
+    background-color: #002244;
+    padding: 5px;
+    color: white;
+}
+
+#day3{
+    background-color: #002244;
+    padding: 5px;
+    color: white;
+}
+  
+#day4{
+    background-color: #002244;
+    padding: 5px; 
+    color: white;
+}
+  
+#day5{
+    background-color: #002244;
+    padding: 5px;
+    color: white;
+}
   
   
