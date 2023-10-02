@@ -30,17 +30,20 @@ $("#searchBtn").click(searchCity);
 function fetchWeatherAPI(city) {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`;
 
-
     $.get(apiURL)
         .done(function (data) {
             // We want to make sure the openweather api is able to send us the data.  If they are not, then we need to give an error.
             if (data.cod === 200) {
                 console.log(data);
                 // Within the function we are also looking to display the date.   So we need to call a new variable and set some parameters.
+
+                
                 const currentDate = new Date();
                 const options = { year: 'numeric', month: '2-digit', day: '2-digit' };  // We want the year in numeric, the month spelled out, and the day also in numeric.  We can change this later to a different format.
                 const formattedDate = currentDate.toLocaleDateString(undefined, options);   //Here we are going to define a value that we can plug into the fields below.
                 const weatherIconcode = data.weather[0].icon;
+
+                console.log("Current Time:", currentDate.toLocaleTimeString());
 
                 updateWeatherUI(data, formattedDate, weatherIconcode);
             }
@@ -70,8 +73,8 @@ function updateWeatherUI(data, formattedDate, weatherIconcode) {
     const weatherIcon = document.getElementById('weatherIcon');
     weatherIcon.src = iconURL;
     weatherIcon.style.display = "inline-block";
-
-}
+    
+  }
 
 
 // We want to keep a list of the cities we searched so users can just click them and see the info again.
@@ -136,7 +139,7 @@ function updateFiveday(data) {
     const forecastContainer = document.getElementById("fiveDayforecast");
 
     for (let i = 0; i < 5; i++) {
-        const day = data.list[i * 8 + 4];
+        const day = data.list[i * 8 + 2];  // Changes our fetch time to 12pm each day
         const date = formatDate(day.dt_txt)
 
       
@@ -162,6 +165,8 @@ function updateFiveday(data) {
 
         forecastContainer.append(dayElement);
             }
+
+        forecastContainer.style.display = "flex";
             
     }
 

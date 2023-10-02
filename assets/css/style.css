@@ -81,8 +81,7 @@ body {
 
 #citiesSearched button{
     width: 100%;
-    padding: 5px;
-    margin: 5px 0;
+    margin: 2px 0;
    }
 
 #weatherContainer {
@@ -94,7 +93,7 @@ body {
     border: 2px solid #ccc; /* Add borders with a color of your choice */
     padding: 20px; /* Add padding for some spacing inside the box */
     margin: 10px; /* Add margin to separate it from other elements */
-    
+    width: 760px;
     background-color: #7CB9E8;
 }
 
@@ -114,41 +113,15 @@ body {
     margin-left: 10px;
 
 }
-
+/* Initially we hide the 5 day boxes, so that we don't view them until after we do a city search and pull a 5 day api */
 #fiveDayforecast {
-    display: flex;
-    flex-direction: row;
+     display: none;
       
 }
 
-#day1{
+#day1, #day2, #day3, #day4, #day5{
     background-color: #002244;
+    color: white;
     padding: 5px;
-    color: white;
+    margin: 5px 5px;
 }
-
-#day2{
-    background-color: #002244;
-    padding: 5px;
-    color: white;
-}
-
-#day3{
-    background-color: #002244;
-    padding: 5px;
-    color: white;
-}
-  
-#day4{
-    background-color: #002244;
-    padding: 5px; 
-    color: white;
-}
-  
-#day5{
-    background-color: #002244;
-    padding: 5px;
-    color: white;
-}
-  
-  
