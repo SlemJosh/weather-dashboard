@@ -132,17 +132,19 @@ body {
     color: white;
     padding: 5px;
     margin: 5px 5px;
+    align-items: center;
+    text-align: center;
 }
 
 #footer{
-    position: fixed; /* Fixed position */
-    bottom: 0; /* Distance from the bottom of the page */
-    left: 0; /* Align to the left */
-    right: 0; /* Align to the right */
-    text-align: center; /* Center content horizontally */
-    display: flex; /* Enable flexbox layout */
-    justify-content: center; /* Center content vertically */
-    background-color: #fff; /* Optional background color */
-    padding: 20px; /* Optional padding for the image */
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    text-align: center;
+    display: flex; 
+    justify-content: center; 
+    background-color: #fff; 
+    padding: 20px; 
 }
 

@@ -6,9 +6,6 @@ const API_KEY = "9d5dfbe83494f7a8091376c453d71c32";
 const city = document.getElementById('searchInput').value;
 const searchedCities = [];
 
-
-
-console.log(city);
 // Our first thing that needs attention is our search box, with both the button and the text entry field.
 // Here's our first function. We called it citySearch, and we declared a variable and set it to the value that will be input on the index page. We also called another function to take the data we pass it.
 function searchCity() {
@@ -34,16 +31,13 @@ function fetchWeatherAPI(city) {
         .done(function (data) {
             // We want to make sure the openweather api is able to send us the data.  If they are not, then we need to give an error.
             if (data.cod === 200) {
-                console.log(data);
-                // Within the function we are also looking to display the date.   So we need to call a new variable and set some parameters.
-
                 
+                // Within the function we are also looking to display the date.   So we need to call a new variable and set some parameters.
+                                               
                 const currentDate = new Date();
                 const options = { year: 'numeric', month: '2-digit', day: '2-digit' };  // We want the year in numeric, the month spelled out, and the day also in numeric.  We can change this later to a different format.
                 const formattedDate = currentDate.toLocaleDateString(undefined, options);   //Here we are going to define a value that we can plug into the fields below.
-                const weatherIconcode = data.weather[0].icon;
-
-                console.log("Current Time:", currentDate.toLocaleTimeString());
+                const weatherIconcode = data.weather[0].icon;             
 
                 updateWeatherUI(data, formattedDate, weatherIconcode);
             }
@@ -97,6 +91,7 @@ function updateSearchhistory() {
 // https://openweathermap.org/weather-conditions
 // Needed to establish some icons provided by the API, so that we can attribute them to not only our current city, but also to the 5 day forecast.
 // Each weather has two potential icons based on wether it's day or night.  While some of the images don't change.  Figured it was important to just keep all the possibilities.
+// I did make it so that the 5 day forecast will try to always pull at 12pm noon, so the night ones should only be present in the current day window.
 const weatherIconimages = {
     '01d': '01d.png',  // clear sky (day)
     '01n': '01n.png',  // clear sky (night)
@@ -119,7 +114,8 @@ const weatherIconimages = {
 };
 
 // Begining of 5 day functions
-
+// Here we are going to fetch the weather from the fivedayforceast api, which is a different link.  We are given things in a JSON type, so we can specifiy to be sent that way. We also neededt to setup our error functions so that
+// can't pull the data we requested we aren't stuck in a loop of it just trying and trying. 
 function fetchFiveday(city) {
     const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`;  // Simliar to above we add the parameter for it to keep things in imperial units
     $.ajax({
@@ -135,25 +131,19 @@ function fetchFiveday(city) {
     })
 }
 
+// Now that we have the data for our five day we need to start plugging it into our html in our 5 different boxes.  We need to alter the HTML by using querySelectors and changing those values to what we just received from our fetch.
+
 function updateFiveday(data) {
     const forecastContainer = document.getElementById("fiveDayforecast");
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {    // We need to increment each day.
         const day = data.list[i * 8 + 2];  // Changes our fetch time to 12pm each day
         const date = formatDate(day.dt_txt)
-
       
-        console.log(day.dt_txt);
         const weatherIcon= day.weather[0].icon;
         const temperature = `Temperature: ${(day.main.temp)} °F`;
         const wind = `Wind: ${(day.wind.speed)} MPH`;
         const humidity = `Humidity: ${day.main.humidity}%`;
-
-        console.log("Date:", date);
-        console.log("Weather Icon:", weatherIcon);
-        console.log("Temperature:", temperature);
-        console.log("Wind:", wind);
-        console.log("Humidity:", humidity);
 
         const dayElement = document.getElementById(`day${i + 1}`);
         dayElement.querySelector(".currentDayforecast").textContent = date;
@@ -164,15 +154,21 @@ function updateFiveday(data) {
 
 
         forecastContainer.append(dayElement);
-            }
+        }
 
-        forecastContainer.style.display = "flex";
+        forecastContainer.style.display = "flex";  // Here we tell the HTML to now display our boxes, where we actually hid them in the CSS to begin with.
             
     }
 
+// Here's is where we can get the time and display it for our five day.
 function formatDate(dateTime) {
     const date = new Date(dateTime);
-    return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+    const year = date.getFullYear().toString().slice(-2); 
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+    const day = date.getDate().toString().padStart(2, '0');
+
+    return `${month}/${day}/${year}`;
+        
 }
 
 
