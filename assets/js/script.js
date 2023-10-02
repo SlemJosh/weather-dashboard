@@ -28,7 +28,7 @@ $("#searchBtn").click(searchCity);
 
 // This is the function for searching the API.  
 function fetchWeatherAPI(city) {
-    const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+    const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`;
 
 
     $.get(apiURL)
@@ -60,8 +60,8 @@ function updateWeatherUI(data, formattedDate, weatherIconcode) {
     const todayCityhumidity = document.getElementById('todayCityhumidity');
 
     todayCityname.textContent = `${data.name} (${formattedDate})`;
-    todayCitytemp.textContent = `Temperature: ${convertKelvinToFahrenheit(data.main.temp)} °F`;  //Had to build a converter function as the initial value was in Kelvin and thats not helpful.
-    const windMPH = convertMPStoMPH(data.wind.speed);
+    todayCitytemp.textContent = `Temperature: ${(data.main.temp)} °F`;  //Had to build a converter function as the initial value was in Kelvin and thats not helpful.
+    const windMPH = (data.wind.speed);
     todayCitywind.textContent = `Wind: ${data.wind.speed} MPH`;  // Also had to build a converter function, as the intitial value was in meters per second, and it'd be much more helpful to have mph.
     todayCityhumidity.textContent = `Humidity: ${data.main.humidity}%`;
     
@@ -73,22 +73,6 @@ function updateWeatherUI(data, formattedDate, weatherIconcode) {
 
 }
 
-
-// Whgen I initially was running the above function I was getting temperature ratings in like the 300's so I looked for a function to convert the temperature they were giving us with the API and
-// converted it from Kelvin to Fahrenheit and then I just needed to plug it into the previous function
-function convertKelvinToFahrenheit(kelvin) {
-    return ((kelvin - 273.15) * 9 / 5 + 32).toFixed(2); // 
-}
-
-
-// Similiar to the Kelvin to Farhrenheit. Want our wind speed to be relatable.  And meters per second isn't the traditional method I am used to.
-function convertMPStoMPH(mps) {
-    // Conversion factor from m/s to mph
-    const conversionFactor = 2.23694;
-    // Calculate the wind speed in mph
-    const mph = mps * conversionFactor;
-    return mph.toFixed(2); // up to 2 decimal places
-}
 
 // We want to keep a list of the cities we searched so users can just click them and see the info again.
 function updateSearchhistory() {
@@ -103,8 +87,9 @@ function updateSearchhistory() {
         historyContainer.append(button);
     })
 
-
 }
+
+
 
 // https://openweathermap.org/weather-conditions
 // Needed to establish some icons provided by the API, so that we can attribute them to not only our current city, but also to the 5 day forecast.
@@ -133,7 +118,7 @@ const weatherIconimages = {
 // Begining of 5 day functions
 
 function fetchFiveday(city) {
-    const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
+    const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`;
     $.ajax({
         url: apiURL,
         method: "GET",
@@ -157,8 +142,8 @@ function updateFiveday(data) {
       
         console.log(day.dt_txt);
         const weatherIcon= day.weather[0].icon;
-        const temperature = `Temperature: ${convertKelvinToFahrenheit(day.main.temp)} °F`;
-        const wind = `Wind: ${convertMPStoMPH(day.wind.speed)} MPH`;
+        const temperature = `Temperature: ${(day.main.temp)} °F`;
+        const wind = `Wind: ${(day.wind.speed)} MPH`;
         const humidity = `Humidity: ${day.main.humidity}%`;
 
         console.log("Date:", date);
