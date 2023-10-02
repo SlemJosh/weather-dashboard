@@ -121,7 +121,7 @@ const weatherIconimages = {
 // Begining of 5 day functions
 
 function fetchFiveday(city) {
-    const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`;
+    const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`;  // Simliar to above we add the parameter for it to keep things in imperial units
     $.ajax({
         url: apiURL,
         method: "GET",

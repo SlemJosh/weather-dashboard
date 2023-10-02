@@ -33,6 +33,7 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    
         
     
 }
@@ -76,12 +77,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-        
+    justify-content: center;
+   
 }
 
 #citiesSearched button{
-    width: 100%;
-    margin: 2px 0;
+     margin: auto;
+        
    }
 
 #weatherContainer {
@@ -113,6 +115,12 @@ body {
     margin-left: 10px;
 
 }
+
+#forecast h3 {
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+}
 /* Initially we hide the 5 day boxes, so that we don't view them until after we do a city search and pull a 5 day api */
 #fiveDayforecast {
      display: none;
@@ -125,3 +133,16 @@ body {
     padding: 5px;
     margin: 5px 5px;
 }
+
+#footer{
+    position: fixed; /* Fixed position */
+    bottom: 0; /* Distance from the bottom of the page */
+    left: 0; /* Align to the left */
+    right: 0; /* Align to the right */
+    text-align: center; /* Center content horizontally */
+    display: flex; /* Enable flexbox layout */
+    justify-content: center; /* Center content vertically */
+    background-color: #fff; /* Optional background color */
+    padding: 20px; /* Optional padding for the image */
+}
+
