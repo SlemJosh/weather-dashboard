@@ -20,7 +20,7 @@ function searchCity() {
     // Also getting the 5 day Weather
     fetchFiveday(searchInput);
 
-    document.getElementById('searchInput').value ="";
+    document.getElementById('searchInput').value = "";
     // Adding our city to the list of searched cities.
     searchedCities.push(searchInput);
 
@@ -78,10 +78,7 @@ function updateWeatherUI(data, formattedDate, weatherIconcode) {
     todayCitytemp.style.display = "block";
     todayCitywind.style.display = "block";
     todayCityhumidity.style.display = "block";
-    
-
 }
-
 
 // We want to keep a list of the cities we searched so users can just click them and see the info again.
 function updateSearchhistory() {
@@ -96,7 +93,6 @@ function updateSearchhistory() {
         });
         historyContainer.append(button);
     });
-
 }
 
 // https://openweathermap.org/weather-conditions
@@ -137,7 +133,7 @@ function fetchFiveday(city) {
         .catch(error => {
             console.error("Error fetching forecast:", error);
         })
-     }
+}
 
 // Now that we have the data for our five day we need to start plugging it into our html in our 5 different boxes.  We need to alter the HTML by using querySelectors and changing those values to what we just received from our fetch.
 
@@ -166,12 +162,11 @@ function updateFiveday(data) {
 
         forecastContainer.append(dayElement);
     }
-
     forecastContainer.style.display = "flex";  // Here we tell the HTML to now display our boxes, where we actually hid them in the CSS to begin with.
-
 }
 
 // Here's is where we can get the time and display it for our five day.
+
 function formatDate(dateTime) {
     const date = new Date(dateTime);
     const year = date.getFullYear().toString().slice(-2);
@@ -179,28 +174,13 @@ function formatDate(dateTime) {
     const day = date.getDate().toString().padStart(2, '0');
 
     return `${month}/${day}/${year}`;
-
 }
 
+// These are our basics for having our button or a keydown event to start the whole process.
 document.getElementById("searchBtn").addEventListener(`click`, searchCity);
-document.getElementById("searchInput").addEventListener(`keydown`, function(event){
+document.getElementById("searchInput").addEventListener(`keydown`, function (event) {
     if (event.keyCode === 13) {
         event.preventDefault();
         searchCity();
     }
-
 });
-/*// We want our function to run upon the button being pressed. But seeing as we want all the information to be obtained.  
-$("#searchBtn").click(searchCity);
-
-
-// I also wanted our button to just work upon someone pressing Enter on the keyboard.
-$("#searchInput").on("keydown", function (event) {
-    if (event.keyCode === 13) {     //The enter key is key 13, so we just check to make sure that that's the button they are pressing.  If it is, and the value in the box is not the default (blank) then it can proceed running our function.
-        event.preventDefault();
-        $("#searchBtn").click();
-    }
-});
-
-
-*/
